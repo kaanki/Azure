@@ -1,0 +1,112 @@
+﻿@using ECommerce.Entity
+@using ECommerce.Repository
+@model Product
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>Detail</h2>
+<div class="center_title_bar">@Html.DisplayFor(t => t.ProductName)</div>
+<div class="prod_box_big">
+    <div class="top_prod_box_big"></div>
+    <div class="center_prod_box_big">
+        <div class="product_img_big">
+            <a href="javascript:popImage('images/big_pic.jpg','Some Title')" title="header=[Zoom] body=[&nbsp;] fade=[on]"><img src="~/Upload/@Html.DisplayFor(m => m.Photo)" alt="" border="0" width="92" height="92" /></a>
+
+        </div>
+        <div class="details_big_box">
+            <div class="product_title_big">@Html.DisplayFor(m => m.ProductName)</div>
+            <div class="specifications">
+                Disponibilitate: <span class="blue">@Html.DisplayFor(m => m.Stock)</span><br />
+                Garantie: <span class="blue">24 Month</span><br />
+                Category <span class="blue">@Html.DisplayFor(m => m.Category.CategoryName)</span><br />
+                Brand <span class="blue">@Html.DisplayFor(m => m.Brand.BrandName)</span><br />
+            </div>
+            <div class="prod_price_big"> <span class="price">@Html.DisplayFor(m => m.Price)</span></div>
+            <a href="~/Order/Add/@Model.ProductId " class="addtocart">add to cart</a>
+        </div>
+    </div>
+    <div class="bottom_prod_box_big"></div>
+</div>
+
+
+
+
+@{
+    <div class="title_box">Yorumlar</div>
+    CommentRep cr = new CommentRep();
+    List<Comment> c = cr.GetListByComId((int)Model.ProductId).ProcessResult;
+
+    foreach (Comment item in c)
+    {
+        <div class="comment_meta">
+            <strong>@item.CName</strong>
+            <p>@item.Comment1</p>
+        </div>
+        }
+
+    }
+
+<div class="clear"></div>
+
+   <div id="comment_form">
+
+  @using (Html.BeginForm())
+  {
+
+        <h3>Yorum Yap</h3>
+
+
+            <label>Isim(*)</label>
+            @Html.TextBox("isim", "", new { @class = "input_field", @required = "true" })
+
+
+            <label>Email(*)</label>
+            @Html.TextBox("email", "", new { @class = "input_field", @required = "true" })
+
+            <label>Yorum(*)</label>
+            @Html.TextArea("yorum", "", new { @required = "true" })
+
+            <label>Telefon(*)</label>
+            @Html.TextArea("telefon", "", new { @required = "true" })
+
+
+            <input type="submit" name="Yorum yap" value="Yorum Yap!" class="submit_btn" />
+    }
+    @ViewBag.basarili
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

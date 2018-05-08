@@ -1,0 +1,34 @@
+﻿@model ECommerce.Entity.Invoice
+
+@{
+    ViewBag.Title = "Pay";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>Pay</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Invoice</legend>
+        <div class="editor-label">
+            @Html.LabelFor(model=> model.Address)
+        </div>
+        <div class="editor-label">
+            @Html.EditorFor(model=>model.Address)
+            @Html.ValidationMessageFor(model=> model.Address)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model=> model.Payment)
+        </div>
+        <div>
+            @Html.DropDownList("PaymentTypes",ViewBag.Skills as SelectList)
+            @Html.ValidationMessageFor(model=> model.PaymentTypeId)
+        </div>
+        <p>
+            <input type="submit" value="Create"/>
+        </p>
+
+    </fieldset>
+}
