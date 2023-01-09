@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "PaySucces";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+@using ECommerce.Entity
+@model Order
+
+@Html.BeginForm(){ 
+
+@if (ViewBag.basarili == "Ödeme Basarili"){
+    <h2>Ödeme Basarili</h2>
+    <table class="table table-condensed">
+        <tr class="active">
+            <td>@Html.DisplayNameFor(t => t.Member.FirstName)</td>
+            <td>@Html.DisplayNameFor(t => t.Member.LastName)</td>
+            <td>@Html.DisplayNameFor(t => t.TotalPrice)</td>
+            <td>@Html.DisplayNameFor(t => t.OrderDate)</td>
+        </tr>
+        <tr>
+            
+            <td>@ViewBag.ad</td>
+            <td>@ViewBag.soyad</td>
+            <td>@Model.TotalPrice</td>
+            <td>@Model.OrderDate</td>
+        </tr>
+    </table>
+    }
+@if (ViewBag.basarili == "Ödeme Basarısız"){
+
+    <h1>@ViewBag.basarili</h1>
+
+
+}
+            }
